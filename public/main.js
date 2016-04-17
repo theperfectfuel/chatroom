@@ -1,11 +1,12 @@
 $(document).ready(function() {
 	var socket = io();
+	var username = socket.username;
 	var input = $('input');
 	var messages = $('#messages');
 	var userCount = $('#user-count');
 
-	//var username = prompt("Enter a username");
-	//socket.emit('addUser', username);
+	var username = prompt("Enter a username");
+	socket.emit('addUser', username);
 
 	var addMessage = function(message) {
 		messages.append('<div>' + message + '</div>');
@@ -29,7 +30,7 @@ $(document).ready(function() {
 		}
 
 		var message = input.val();
-		addMessage(socket.id + ': ' + message);
+		//addMessage(socket.id + ': ' + message);
 		socket.emit('message', message);
 		input.val('');
 	});
